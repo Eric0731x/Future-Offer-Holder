@@ -1,0 +1,53 @@
+<% include "preamble.tex" %>
+
+\begin{document}
+
+\begin{center}
+  {\Huge\bfseries << data.period_label >>}\\[0.3em]
+  {\color{muted}\small 生成时间 << data.generated_at >>　|
+   用户 << data.user.get('姓名', '-') >>　|
+   学校 << data.user.get('学校', '-') >>　|
+   专业 << data.user.get('专业', '-') >>}
+\end{center}
+
+\section{OKR 总览}
+\textbf{Objective}：<< data.okr.get('Objective', '-') >>
+
+\begin{itemize}
+  \item 整体完成度：<< data.stats.overall_progress >>\%
+  \item KR 总数 / 已完成：<< data.stats.kr_count >> / << data.stats.completed_kr >>
+  \item 本周期投入：<< data.stats.total_hours >> 小时
+\end{itemize}
+
+\section{KR 推进详情}
+\begin{longtable}{p{5cm} p{2cm} p{1.5cm} p{2cm} p{1.5cm} p{1.5cm}}
+\hline
+\textbf{KR} & \textbf{分类} & \textbf{优先级} & \textbf{学期} & \textbf{状态} & \textbf{完成度} \\
+\hline
+<% for k in data.krs %>
+<< k.get('KR 内容', '') >> & << k.get('分类','') >> & << k.get('优先级','') >> & << k.get('所属学期','') >> & << k.get('状态','') >> & << k.get('完成度', 0) >>\% \\
+<% endfor %>
+\hline
+\end{longtable}
+
+\section{学习日志摘要}
+共 << data.stats.log_count >> 条日志，累计投入 << data.stats.total_hours >> 小时。
+
+\begin{itemize}
+<% for l in data.logs[:15] %>
+  \item [<< l.get('投入时长', 0) >>h] << (l.get('今日做了什么') or '')[:80] >>
+<% endfor %>
+\end{itemize}
+
+\section{AI 综合建议}
+<% for a in data.advice[:8] %>
+\textbf{[<< a.get('建议类型','') >>]} << a.get('核心建议（摘要）', '') >>\\
+<% endfor %>
+
+\section{下一阶段重点}
+基于上述数据，请重点关注：未完成的 P0 KR、最近建议中提示的「值得思考的地方」。
+
+\section{附录}
+本报告由 OFFER 预备役自动生成。
+
+\end{document}

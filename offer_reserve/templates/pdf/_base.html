@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>{{ data.period_label }} - OFFER 预备役</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>{{ data.period_label }}</h1>
+  <div class="meta">
+    生成时间：{{ data.generated_at }}　|
+    用户：{{ data.user.get('姓名', '—') }}　|
+    学校：{{ data.user.get('学校', '—') }}　|
+    专业：{{ data.user.get('专业', '—') }}
+  </div>
+
+  <h2>一、OKR 总览</h2>
+  <p><strong>Objective</strong>：{{ data.okr.get('Objective', '—') }}</p>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="label">整体完成度</div><div class="value">{{ data.stats.overall_progress }}%</div></div>
+    <div class="stat-card"><div class="label">KR 总数</div><div class="value">{{ data.stats.kr_count }}</div></div>
+    <div class="stat-card"><div class="label">已完成 KR</div><div class="value">{{ data.stats.completed_kr }}</div></div>
+    <div class="stat-card"><div class="label">本周期投入</div><div class="value">{{ data.stats.total_hours }}h</div></div>
+  </div>
+
+  <h2>二、KR 推进详情</h2>
+  <div class="chart">{{ chart_progress | safe }}</div>
+  <table>
+    <thead><tr><th>KR</th><th>分类</th><th>优先级</th><th>学期</th><th>状态</th><th>完成度</th></tr></thead>
+    <tbody>
+      {% for k in data.krs %}
+      <tr>
+        <td>{{ k.get('KR 内容', '') }}</td>
+        <td>{{ k.get('分类', '') }}</td>
+        <td><span class="tag tag-{{ (k.get('优先级','') or '')|lower }}">{{ k.get('优先级', '') }}</span></td>
+        <td>{{ k.get('所属学期', '') }}</td>
+        <td>{{ k.get('状态', '') }}</td>
+        <td>{{ k.get('完成度', 0) }}%</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>三、学习日志摘要</h2>
+  <p>共 {{ data.stats.log_count }} 条日志，累计投入 {{ data.stats.total_hours }} 小时。</p>
+  <table>
+    <thead><tr><th>日期</th><th>时长</th><th>做了什么</th><th>学到了什么</th><th>状态</th></tr></thead>
+    <tbody>
+      {% for l in data.logs[:20] %}
+      <tr>
+        <td>—</td>
+        <td>{{ l.get('投入时长', 0) }}h</td>
+        <td>{{ (l.get('今日做了什么') or '')[:60] }}</td>
+        <td>{{ (l.get('学到了什么') or '')[:60] }}</td>
+        <td>{{ l.get('状态心情', '') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>四、AI 综合建议</h2>
+  {% for a in data.advice[:8] %}
+  <div class="advice">
+    <div class="summary">[{{ a.get('建议类型','') }}] {{ a.get('核心建议（摘要）', '') }}</div>
+  </div>
+  {% else %}
+  <p>本周期暂无 AI 建议。</p>
+  {% endfor %}
+
+  <h2>五、能力雷达</h2>
+  <div class="chart">{{ chart_radar | safe }}</div>
+
+  <h2>六、附录</h2>
+  <p>本报告由 OFFER 预备役自动生成，数据源自飞书多维表格 + 云文档。</p>
+</body>
+</html>

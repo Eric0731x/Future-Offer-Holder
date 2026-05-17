@@ -1,0 +1,47 @@
+@page {
+  size: A4;
+  margin: 18mm 16mm;
+  @bottom-right {
+    content: "OFFER 预备役 · 第 " counter(page) " / " counter(pages) " 页";
+    font-size: 9pt;
+    color: #888;
+  }
+}
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Source Han Sans", sans-serif;
+  font-size: 11pt;
+  color: #222;
+  line-height: 1.55;
+}
+
+h1 { font-size: 22pt; color: #1f2937; margin: 0 0 4pt; }
+h2 { font-size: 14pt; color: #1f2937; margin-top: 18pt; border-bottom: 2px solid #3b82f6; padding-bottom: 4pt; }
+h3 { font-size: 12pt; color: #374151; margin-top: 12pt; }
+
+.meta { color: #6b7280; font-size: 10pt; margin-bottom: 12pt; }
+
+.stat-grid { display: flex; gap: 12pt; margin: 12pt 0; }
+.stat-card {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 6pt;
+  padding: 10pt 12pt;
+  background: #f9fafb;
+}
+.stat-card .label { font-size: 9pt; color: #6b7280; }
+.stat-card .value { font-size: 18pt; font-weight: 600; color: #1f2937; margin-top: 4pt; }
+
+table { width: 100%; border-collapse: collapse; font-size: 10pt; margin-top: 6pt; }
+th, td { border-bottom: 1px solid #e5e7eb; padding: 6pt 8pt; text-align: left; vertical-align: top; }
+th { background: #f3f4f6; color: #374151; }
+
+.tag { display: inline-block; padding: 1pt 6pt; border-radius: 8pt; font-size: 9pt; background: #eff6ff; color: #1d4ed8; }
+.tag-p0 { background: #fee2e2; color: #b91c1c; }
+.tag-p1 { background: #fef3c7; color: #b45309; }
+.tag-p2 { background: #e5e7eb; color: #4b5563; }
+
+.advice { border-left: 3px solid #3b82f6; background: #eff6ff; padding: 8pt 12pt; margin: 6pt 0; }
+.advice .summary { font-weight: 600; color: #1e3a8a; }
+
+.chart { text-align: center; margin: 10pt 0; }
