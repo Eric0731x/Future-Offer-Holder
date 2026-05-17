@@ -1,0 +1,267 @@
+/* ─────────────────────────────────────────────────────────────
+   OFFER 预备役 — design tokens
+   System: 「素笺」white paper, restrained, one warm accent.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* surfaces */
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-sunk: #f5f5f4;
+  --surface-glass: rgba(255, 255, 255, 0.72);
+  --hairline: rgba(10, 10, 10, 0.07);
+  --hairline-strong: rgba(10, 10, 10, 0.14);
+
+  /* ink */
+  --ink: #0a0a0a;
+  --ink-soft: #1f1f1f;
+  --ink-2: #525252;
+  --ink-3: #a3a3a3;
+  --ink-4: #d4d4d4;
+  --on-dark: #fafaf9;
+
+  /* the single accent — warm orange (streak / CTA / fire) */
+  --accent: #ea580c;
+  --accent-soft: #fff1e6;
+  --accent-deep: #c2410c;
+
+  /* status */
+  --good: #15803d;
+  --good-soft: #dcfce7;
+  --warn: #b45309;
+  --warn-soft: #fef3c7;
+  --bad: #b91c1c;
+  --bad-soft: #fee2e2;
+  --neutral: #404040;
+
+  /* type */
+  --font-display: "Manrope", "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Source Han Sans CN", "Microsoft YaHei", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Source Han Sans CN", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+  --font-ch: "PingFang SC", "Source Han Sans CN", -apple-system, sans-serif;
+
+  /* radii */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  /* elevation — liquid glass driven */
+  --shadow-1: 0 1px 0 rgba(10, 10, 10, 0.03), 0 1px 2px rgba(10, 10, 10, 0.04);
+  --shadow-2: 0 1px 0 rgba(10, 10, 10, 0.03), 0 8px 24px -8px rgba(10, 10, 10, 0.10);
+  --shadow-3: 0 1px 0 rgba(10, 10, 10, 0.04), 0 16px 40px -12px rgba(10, 10, 10, 0.18);
+  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 12px 40px rgba(10, 10, 10, 0.12), 0 0 0 0.5px rgba(10, 10, 10, 0.06);
+}
+
+/* dark theme */
+.theme-dark {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-sunk: #1c1c1b;
+  --surface-glass: rgba(28, 28, 27, 0.72);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.16);
+  --ink: #fafaf9;
+  --ink-soft: #e5e5e5;
+  --ink-2: #a3a3a3;
+  --ink-3: #737373;
+  --ink-4: #404040;
+  --on-dark: #0a0a0a;
+  --accent: #fb923c;
+  --accent-soft: rgba(251, 146, 60, 0.14);
+  --accent-deep: #fdba74;
+  --good: #4ade80;
+  --good-soft: rgba(74, 222, 128, 0.14);
+  --warn: #fbbf24;
+  --warn-soft: rgba(251, 191, 36, 0.14);
+  --bad: #f87171;
+  --bad-soft: rgba(248, 113, 113, 0.14);
+  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+}
+
+/* font variants */
+.font-modern { --font-display: "Manrope", "Inter", -apple-system, "PingFang SC", sans-serif; --font-body: "Inter", -apple-system, "PingFang SC", sans-serif; }
+.font-serif  { --font-display: "Noto Serif SC", "Source Han Serif CN", "Songti SC", "PingFang SC", serif; --font-body: "Noto Serif SC", "Source Han Serif CN", "Songti SC", "PingFang SC", serif; }
+.font-heihei { --font-display: "Manrope", "Inter", "PingFang SC", "Microsoft YaHei", sans-serif; --font-body: "PingFang SC", "Microsoft YaHei", "Inter", sans-serif; font-weight: 400; }
+
+/* variant: calm (conservative) vs bold */
+.variant-bold {
+  --r-md: 18px;
+  --r-lg: 26px;
+  --r-xl: 36px;
+}
+
+/* ── base reset ─────────────────────────────────────────────── */
+
+* { box-sizing: border-box; }
+.op-app, .op-app * { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+.op-app {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+  position: relative;
+  letter-spacing: -0.005em;
+}
+
+.op-app h1, .op-app h2, .op-app h3, .op-app h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--ink);
+}
+
+.op-app button { font-family: inherit; }
+
+/* numeric */
+.op-num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* utility scroll */
+.op-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--ink-4) transparent; }
+.op-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.op-scroll::-webkit-scrollbar-thumb { background: var(--ink-4); border-radius: 3px; }
+.op-scroll-x { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.op-scroll-x::-webkit-scrollbar { display: none; }
+
+/* ── pill button (the reference's signature shape) ──────────── */
+
+.op-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px 0 6px;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: var(--on-dark);
+  border: none;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.12s, opacity 0.12s, background 0.18s;
+  white-space: nowrap;
+}
+.op-pill:hover { transform: scale(1.02); }
+.op-pill:active { transform: scale(0.97); }
+.op-pill > .op-pill__dot {
+  width: 24px; height: 24px;
+  border-radius: var(--r-pill);
+  background: var(--on-dark);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+}
+.op-pill--ghost { background: transparent; color: var(--ink); border: 1px solid var(--hairline-strong); padding: 0 16px; height: 36px; }
+.op-pill--ghost:hover { background: var(--surface-sunk); }
+.op-pill--ghost > .op-pill__dot { background: var(--ink); color: var(--on-dark); }
+.op-pill--accent { background: var(--accent); color: white; }
+.op-pill--accent > .op-pill__dot { background: white; color: var(--accent); }
+.op-pill--sm { height: 28px; padding: 0 12px 0 4px; font-size: 12px; }
+.op-pill--sm > .op-pill__dot { width: 20px; height: 20px; flex: 0 0 20px; }
+.op-pill--lg { height: 48px; padding: 0 22px 0 8px; font-size: 14px; }
+.op-pill--lg > .op-pill__dot { width: 36px; height: 36px; flex: 0 0 36px; }
+.op-pill--text { padding: 0 16px; }
+
+/* glass / liquid card */
+.op-glass {
+  background: var(--surface-glass);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 0.5px solid var(--hairline-strong);
+  box-shadow: var(--shadow-glass);
+}
+
+/* hairline divider */
+.op-hr { height: 1px; background: var(--hairline); border: none; margin: 0; }
+
+/* tag chip */
+.op-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: var(--r-pill);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
+  background: var(--surface-sunk); color: var(--ink-2);
+  border: 1px solid var(--hairline);
+}
+.op-chip--accent { background: var(--accent-soft); color: var(--accent-deep); border-color: transparent; }
+.op-chip--good { background: var(--good-soft); color: var(--good); border-color: transparent; }
+.op-chip--warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.op-chip--bad { background: var(--bad-soft); color: var(--bad); border-color: transparent; }
+
+/* card */
+.op-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 20px;
+}
+.op-card--sunk { background: var(--surface-sunk); border-color: transparent; }
+.op-card--ink { background: var(--ink); color: var(--on-dark); border-color: transparent; }
+.op-card--ink h1, .op-card--ink h2, .op-card--ink h3 { color: var(--on-dark); }
+
+/* logo mark */
+.op-logo {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
+}
+.op-logo__mark {
+  width: 28px; height: 16px;
+  background: var(--ink); border-radius: 999px;
+  position: relative; flex: 0 0 28px;
+}
+.op-logo__mark::after {
+  content: ""; position: absolute; top: 50%; left: 4px;
+  width: 8px; height: 8px; background: var(--on-dark); border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+/* number display (hero stats) */
+.op-bignum {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  font-feature-settings: "tnum";
+}
+
+/* striped corner label (reference: small uppercase mono labels) */
+.op-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+/* button reset */
+.op-btn { font: inherit; border: none; background: transparent; cursor: pointer; color: inherit; padding: 0; }
+
+/* status dots */
+.op-dot { width: 8px; height: 8px; border-radius: 999px; display: inline-block; flex: 0 0 8px; }
+.op-dot--good { background: var(--good); }
+.op-dot--warn { background: var(--warn); }
+.op-dot--bad { background: var(--bad); }
+.op-dot--accent { background: var(--accent); }
+.op-dot--ink { background: var(--ink); }
+
+/* slide-up on mount */
+@keyframes op-fade-up { from { transform: translateY(8px); } to { transform: none; } }
+.op-fade { animation: op-fade-up 0.32s cubic-bezier(.2,.7,.2,1) both; }
+
+/* checkin success pop */
+@keyframes op-pop { 0%{transform:scale(.3);opacity:0} 60%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+
+/* gentle hover lift */
+.op-hover:hover { background: var(--surface-sunk); }
+.op-hover-card { transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; cursor: pointer; }
+.op-hover-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); border-color: var(--hairline-strong); }
+
+/* html/body full height */
+html, body, #root { height: 100%; margin: 0; padding: 0; }
