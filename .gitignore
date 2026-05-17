@@ -14,3 +14,6 @@ build/
 *.egg-info/
 node_modules/
 frontend/dist/
+*.tsbuildinfo
+vite.config.d.ts
+vite.config.js
